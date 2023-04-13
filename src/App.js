@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Identify from "./View/IdentifyView";
+import AuthProvider from "./contexts/AuthContext";
+import AppLayout from "./Layout/AppLayout";
+import MatchesView from "./View/MatchesView";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<AppLayout />}>
+            <Route path="/" element={<h2>Hello Home</h2>} />
+            <Route path="identify" element={<Identify />} />
+            <Route path="/matches" element={<MatchesView/>} />
+            </Route>
+          </Routes>
+        </AuthProvider>
+      </BrowserRouter>
     </div>
   );
 }

@@ -1,0 +1,20 @@
+@host = http://fauques.freeboxos.fr:3000
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Njg3ZDZiOC0zNjJiLTQ1MTItYjNhNy0zNGU5ODRlYjhkZDkiLCJ1c2VybmFtZSI6IkxvIiwiaWF0IjoxNjgxMzMzOTM4LCJleHAiOjE3MTI4OTE1Mzh9.MQ3B4egyOsPpRif5zqGx_IXJ4FyjqozU-LQX6AHCfio
+
+POST {{host}}/login
+Content-Type: application/json
+
+{
+  "username": "Lo",
+  "password": "test2"
+}
+
+
+###
+GET {{host}}/matches
+Authorization: Bearer {{token}}
+
+###
+POST {{host}}/matches
+Authorization: Bearer {{token}}
