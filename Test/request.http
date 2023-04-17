@@ -17,9 +17,9 @@ Authorization: Bearer {{token}}
 
 ###
 POST {{host}}/matches
-Authorization: Bearer {{token}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI5NmZlZmFiMS1lYTQ3LTQwOTAtYjEwMi0xNTliMjczMDUwMDkiLCJ1c2VybmFtZSI6InRlc3QyMSIsImlhdCI6MTY4MTU4MjI5MCwiZXhwIjoxNzEzMTM5ODkwfQ.B1btyGUa98zxNF6Cbb7hGOwPlghF2ngxUFHbuXHyDa8
 ###
-POST {{host}}/matches/64382c5c1e1b9407b260f34f/turns/3
+POST {{host}}/matches/643d8e211e1b9407b262bc8f/turns/1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI5NmZlZmFiMS1lYTQ3LTQwOTAtYjEwMi0xNTliMjczMDUwMDkiLCJ1c2VybmFtZSI6InRlc3QyMSIsImlhdCI6MTY4MTU4MjI5MCwiZXhwIjoxNzEzMTM5ODkwfQ.B1btyGUa98zxNF6Cbb7hGOwPlghF2ngxUFHbuXHyDa8
 Content-Type: application/json
 
@@ -37,7 +37,7 @@ Content-Type: application/json
 
 ###
 
-GET {{host}}/matches/64382c5c1e1b9407b260f34f
+GET {{host}}/matches/643521a71e1b9407b260ea3b
 Authorization: Bearer {{token}}
 
 ###

@@ -5,12 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 export default function MatchesView() {
-  const { matches ,getMatches, createMatch, matchError } = useContext(MatchContext);
+  const { matches ,getMatches, createMatch, error } = useContext(MatchContext);
   const {user} = useContext(AuthContext); 
   const navigate = useNavigate();
 
   const handleMatch = (match) => {
-    console.log(match._id);
     navigate(`/matches/${match._id}`);
     
   };
@@ -27,7 +26,7 @@ export default function MatchesView() {
       <div>
           <button onClick={getMatches}>Rafraichir</button>
       <button onClick={createMatch}>Créer une partie</button>
-       { matchError && <p>{matchError.message}</p> }
+       { error && <p>{error.message}</p> }
       </div>
    
       }  

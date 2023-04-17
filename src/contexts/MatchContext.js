@@ -6,7 +6,7 @@ export const MatchContext = createContext();
 
 export default function MatchProvider({ children }) {
 const [matches, setMatches] = useState([]);
-const [matchError, setError] = useState(null);
+const [error, setError] = useState(null);
 const [match, setMatch] = useState([]);
 async function getMatches() {
     try {
@@ -75,6 +75,6 @@ useEffect(() => {
 
 
   return (
-    <MatchContext.Provider value={{matches, getMatches, createMatch, matchError, getMatch, match}}>{children}</MatchContext.Provider>
+    <MatchContext.Provider value={{matches, getMatches, createMatch, error, getMatch, match}}>{children}</MatchContext.Provider>
   );
 }
