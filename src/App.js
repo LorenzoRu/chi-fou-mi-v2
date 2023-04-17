@@ -3,19 +3,25 @@ import Identify from "./View/IdentifyView";
 import AuthProvider from "./contexts/AuthContext";
 import AppLayout from "./Layout/AppLayout";
 import MatchesView from "./View/MatchesView";
+import MatchProvider from "./contexts/MatchContext";
+import MatchView from "./View/MatchView";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <AuthProvider>
+          <MatchProvider>
           <Routes>
             <Route path="/" element={<AppLayout />}>
             <Route path="/" element={<h2>Hello Home</h2>} />
             <Route path="identify" element={<Identify />} />
-            <Route path="/matches" element={<MatchesView/>} />
+               <Route path="/matches" element={<MatchesView/>} />
+            <Route path="/matches/:id" element={<MatchView/>} / >
+
             </Route>
-          </Routes>
+          </Routes>  
+          </MatchProvider>
         </AuthProvider>
       </BrowserRouter>
     </div>

@@ -1,54 +1,22 @@
-import React, { useContext, useEffect } from "react";
-import { API_BASE_URL } from "../lib/constante.js";
-import { newFetch } from "../lib/fetch.js";
+import React, { useContext} from "react";
 import { AuthContext } from "../contexts/AuthContext.js";
+import { MatchContext } from "../contexts/MatchContext.js";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function MatchesView() {
+  const { matches ,getMatches, createMatch, matchError } = useContext(MatchContext);
   const {user} = useContext(AuthContext); 
-  const [matches, setMatches] = React.useState([]);
-  const [error, setError] = React.useState(null);
-  async function getMatches() {
-    try {
-      const response = await fetch(`${API_BASE_URL}/matches`, {
-        method: "GET",
-        newFetch
-      });
+  const navigate = useNavigate();
 
-      if (response.status === 200) {
-        const data = await response.json();
-        console.log(data);
-        setMatches(data);
-      } else {
-        console.log(response.status);
-        throw new Error("Erreur lors de la connexion");
-      }
-    } catch (error) {
-      console.error(error);
-    }
-}
-async function createMatch() {
-  try {
-    const response = await fetch(`${API_BASE_URL}/matches`, {
-      method: "POST",
-      newFetch
-    })
-    if (response.status === 201){
-      const data = await response.json();
-      console.log(data);
-      getMatches();
-    }else {
-      const errorData = await response.json();
-      const error = JSON.stringify(errorData);
-      throw new Error(error);
-    }
-  } catch (error) {
-    setError(error);
-  }
-
-}
-  useEffect(() => {
+  const handleMatch = (match) => {
+    console.log(match._id);
+    navigate(`/matches/${match._id}`);
+    
+  };
+  useEffect(() => {  
     getMatches();
-  }, []);
+}, [])
 
  return (
     <div>
@@ -59,7 +27,7 @@ async function createMatch() {
       <div>
           <button onClick={getMatches}>Rafraichir</button>
       <button onClick={createMatch}>Créer une partie</button>
-       { error && <p>{error.message}</p> }
+       { matchError && <p>{matchError.message}</p> }
       </div>
    
       }  
@@ -69,7 +37,7 @@ async function createMatch() {
               {match.user2  ? (
                     <h3>{match.user1 && match.user1.username}  VS {match.user2 && match.user2.username}</h3>
             ) : (<h3> En attente d'un adversire</h3>)}
-              
+              <button onClick={() => handleMatch(match)}>Rejoindre</button>
             </div>
     
       )} { user !== false&& matches.length === 0 && <p>Vous n'avez pas de partie</p>}

@@ -6,8 +6,8 @@ POST {{host}}/login
 Content-Type: application/json
 
 {
-  "username": "Lo",
-  "password": "test2"
+  "username": "test21",
+  "password": "test"
 }
 
 
@@ -18,3 +18,26 @@ Authorization: Bearer {{token}}
 ###
 POST {{host}}/matches
 Authorization: Bearer {{token}}
+###
+POST {{host}}/matches/64382c5c1e1b9407b260f34f/turns/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI5NmZlZmFiMS1lYTQ3LTQwOTAtYjEwMi0xNTliMjczMDUwMDkiLCJ1c2VybmFtZSI6InRlc3QyMSIsImlhdCI6MTY4MTU4MjI5MCwiZXhwIjoxNzEzMTM5ODkwfQ.B1btyGUa98zxNF6Cbb7hGOwPlghF2ngxUFHbuXHyDa8
+Content-Type: application/json
+
+{
+ "move": "rock" 
+}
+###
+POST {{host}}/matches/64382c5c1e1b9407b260f34f/turns/3
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+ "move": "scissors" 
+}
+
+###
+
+GET {{host}}/matches/64382c5c1e1b9407b260f34f
+Authorization: Bearer {{token}}
+
+###
