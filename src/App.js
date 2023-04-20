@@ -5,6 +5,7 @@ import AppLayout from "./Layout/AppLayout";
 import MatchesView from "./View/MatchesView";
 import MatchProvider from "./contexts/MatchContext";
 import MatchView from "./View/MatchView";
+import "./css/main.css";
 
 function App() {
   return (
