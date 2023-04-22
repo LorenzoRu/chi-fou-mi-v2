@@ -10,36 +10,10 @@ export default function MatchView() {
   const { getMatch, match } = useContext(MatchContext);
   const { id } = useParams();
   const [error, setError] = useState(null);
-  const token = localStorage.getItem("token");
-  const [playerJoinMessage, setPlayerJoinMessage] = useState("");
 
   useEffect(() => {
     getMatch(id);
-    const eventMatch = new EventSourcePolyfill(
-      `${API_BASE_URL}/matches/${id}/subscribe`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    eventMatch.onmessage = (event) => {
-      const eventData = JSON.parse(event.data);
-      console.log("Type: ", eventData.type);
-      console.log("Match ID: ", eventData.matchId);
-      console.log("Payload: ", eventData.payload);
-
-      if (eventData.type === "PLAYER1_JOIN" || eventData.type === "PLAYER2_JOIN") {
-        setPlayerJoinMessage(`${eventData.payload.user} a rejoint la partie.`);
-      }
-    };
-
-
-    return () => {
-      eventMatch.close();
-    };
-  }, []);
+  }, [id]);
 
   async function handleTurn(move) {
     try {
@@ -80,7 +54,6 @@ export default function MatchView() {
           <button onClick={() => handleTurn("rock")}>Pierre</button>
           <button onClick={() => handleTurn("paper")}>Papier</button>
           <button onClick={() => handleTurn("scissors")}>Ciseaux</button>
-          <p>{playerJoinMessage}</p>
           <p>Match ID: {match._id}</p>
           <p>Winner: {match.winner && match.winner.username}</p>
           <p>Turns: {match.turns && match.turns.length}</p>

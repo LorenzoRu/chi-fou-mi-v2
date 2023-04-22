@@ -1,18 +1,20 @@
 import { createContext, useEffect, useState } from "react";
 import { API_BASE_URL } from "../lib/constante.js";
 import { newFetch } from "../lib/fetch.js";
+import { useNavigate } from "react-router-dom";
 
 export const MatchContext = createContext();
 
 export default function MatchProvider({ children }) {
-const [matches, setMatches] = useState([]);
-const [error, setError] = useState(null);
-const [match, setMatch] = useState([]);
-async function getMatches() {
+  const [matches, setMatches] = useState([]);
+  const [error, setError] = useState(null);
+  const [match, setMatch] = useState([]);
+  const navigate = useNavigate();
+  async function getMatches() {
     try {
       const response = await fetch(`${API_BASE_URL}/matches`, {
         method: "GET",
-        newFetch
+        newFetch,
       });
 
       if (response.status === 200) {
@@ -21,44 +23,47 @@ async function getMatches() {
         setMatches(data);
       } else {
         console.log(response.status);
-        throw new Error("Erreur lors de la connexion");
-      }
-    } catch (error) {
-      console.error(error);
-    }
-}
-
-async function getMatch(_id) {
-    try {
-      const response = await fetch(`${API_BASE_URL}/matches/${_id}`, {
-        method: "GET",
-        newFetch
-      });
-  
-      if (response.status === 200) {
-        const data = await response.json();
-        setMatch(data);
-     
-
-      } else {
-        console.log(response.status);
-        throw new Error("Erreur lors de la récupération des informations du match");
+        throw new Error(
+          "Erreur lors de la récupération des informations du match"
+        );
       }
     } catch (error) {
       console.error(error);
     }
   }
-async function createMatch() {
+
+  async function getMatch(_id) {
+    try {
+      const response = await fetch(`${API_BASE_URL}/matches/${_id}`, {
+        method: "GET",
+        newFetch,
+      });
+
+      if (response.status === 200) {
+        const data = await response.json();
+        setMatch(data);
+      } else {
+        console.log(response.status);
+        throw new Error(
+          "Erreur lors de la récupération des informations du match"
+        );
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async function createMatch() {
     try {
       const response = await fetch(`${API_BASE_URL}/matches`, {
         method: "POST",
-        newFetch
-      })
-      if (response.status === 201){
+        newFetch,
+      });
+      if (response.status === 201) {
         const data = await response.json();
-        console.log(data);
+        console.log(data._id);
+        navigate(`/matches/${data._id}`);
         getMatches();
-      }else {
+      } else {
         const errorData = await response.json();
         const error = JSON.stringify(errorData);
         throw new Error(error);
@@ -66,12 +71,13 @@ async function createMatch() {
     } catch (error) {
       setError(error);
     }
-  
   }
 
-
-
   return (
-    <MatchContext.Provider value={{matches, getMatches, createMatch, error, getMatch, match}}>{children}</MatchContext.Provider>
+    <MatchContext.Provider
+      value={{ matches, getMatches, createMatch, error, getMatch, match }}
+    >
+      {children}
+    </MatchContext.Provider>
   );
 }
