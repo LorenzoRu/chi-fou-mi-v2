@@ -69,9 +69,6 @@ async function createMatch() {
   
   }
 
-useEffect(() => {
-    getMatches();
-}, [])
 
 
   return (

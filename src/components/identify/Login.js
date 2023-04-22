@@ -15,8 +15,8 @@ export default function Login() {
     }
   return (
     <>
-      <Form onSubmit={handleLogin} />
-      {error && <p>{error}</p>}
+      <Form onSubmit={handleLogin} error={error}/>
+      
     </>
   );
 }

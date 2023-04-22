@@ -1,0 +1,30 @@
+.navbar-desktop {
+  min-height: 10vh;
+  background-color: var(--color-secondary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-desktop a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: 600;
+    padding: 0 1rem;
+    display: block;
+   display: flex;
+   align-items: center;
+   
+
+}
+.navbar-desktop .links {
+  display: flex;
+  
+}
+
+.navbar-desktop a .nav-icon{
+  text-align: center;
+  font-size: 2rem;
+  margin-right: 0.6rem;
+}

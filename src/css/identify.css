@@ -1,0 +1,48 @@
+h3 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.identify-container {
+  display: grid;
+  place-items: center;
+}
+.form-container {
+  width: 65%;
+  height: auto;
+  background-color: var(--color-quaternary);
+  border-radius: 35px 0;
+  display: flex;
+}
+.rubik {
+  width: 50%;
+}
+.image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 35px 0 0 0;
+  background-color: var(--color-tertiary);
+  width: 50%; 
+}
+.form {
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 50%;
+}
+.info {
+  font-size: 1.5rem;
+}
+.info span {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+.info span:hover {
+ cursor: pointer;
+}
+

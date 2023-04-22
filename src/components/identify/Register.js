@@ -14,8 +14,7 @@ export default function Register() {
     }
   return (
     <>
-    <Form onSubmit={handleRegister} />
-    {error && <p>{error}</p>}
+    <Form onSubmit={handleRegister} error={error}/>
     </>
   )
 }
