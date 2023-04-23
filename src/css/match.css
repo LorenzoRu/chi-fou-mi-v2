@@ -1,0 +1,9 @@
+.game-container {
+    padding: 2.5rem;
+}
+.game-container h3 {
+    margin-bottom: 3rem;
+    font-size: 5rem;
+    font-weight: 600;
+    color: var(--color-primary);
+}

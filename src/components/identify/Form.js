@@ -14,7 +14,7 @@ export default function Form({onSubmit, error}) {
            <p className='error-txt'>{error}</p>
         </div>
        
-        <input type='submit' value='Confirmer' />
+        <input type='submit' value='Confirmer' className='form-btn'/>
     </form>
   )
 }

@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { API_BASE_URL } from "../lib/constante.js";
 import { newFetch } from "../lib/fetch.js";
 import { useNavigate } from "react-router-dom";

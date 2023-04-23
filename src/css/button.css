@@ -1,0 +1,14 @@
+.btn{
+    display: flex;
+    align-items: center;
+}
+
+.start-icon {
+    margin-right: 0.8rem;
+    margin-left: 1.2rem;
+    width: 2rem;
+}
+
+.btn-txt {
+    margin-right: 2rem;
+}

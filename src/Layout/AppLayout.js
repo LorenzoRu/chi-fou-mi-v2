@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { Link, Outlet } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHandScissors, faHouse, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faHandScissors, faHouse, faPlugCircleXmark, faUser } from "@fortawesome/free-solid-svg-icons";
+import Button from "../components/Button.js";
 
 
 export default function AppLayout() {
@@ -15,7 +16,7 @@ export default function AppLayout() {
         <Link to="/matches"><FontAwesomeIcon icon={faHandScissors } className="nav-icon"/>Jouer</Link>
         {!user && <Link to="/identify"><FontAwesomeIcon icon={faUser} className="nav-icon"/>Login</Link>}
         </div>
-        {user && <button onClick={logout}>Logout</button>}
+        {user && <Button text={"Se déconnecter"} onClick={logout} color={"var(--color-tertiary)"} startIcon={<FontAwesomeIcon icon={faPlugCircleXmark}/>}/>}
       </nav>
       <Outlet />
     </div>

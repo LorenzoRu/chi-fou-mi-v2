@@ -1,0 +1,43 @@
+.btn-box {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2rem;
+  border-bottom: 0.2rem solid var(--color-secondary);
+}
+.items-container {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  padding: 2rem;
+}
+.items {
+  position: relative;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+.items h3 {
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--color-primary);
+}
+.error-container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 3rem;
+  font-size: 1.5rem;
+}
+
+.toast {
+  background-color: white;
+  padding: 1rem;
+  margin: 0.7rem;
+  border: 0.1rem solid rgb(181, 181, 181);
+  border-left: 3px solid red;
+}
+.err {
+  color: red;
+  margin-right: 1rem;
+}

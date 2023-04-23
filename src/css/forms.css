@@ -24,6 +24,20 @@ input[type="text"], input[type="password"]{
     color: var(--color-primary);
 }
 
+input[type="submit"]{
+  background-color: var(--color-tertiary);
+  color: whitesmoke;
+  font-weight: 600;
+  border-radius: 1rem;
+}
+input[type="submit"]:hover{
+  background-color: #e2e2fc;
+  color: var(--color-primary);
+  font-weight: 600;
+  border-radius: 1rem;
+}
+
+
 .error {
   font-size: 1.5rem;
   color: red;
