@@ -4,6 +4,9 @@ import { createMemoryRouter, useParams } from "react-router-dom";
 import { API_BASE_URL } from "../lib/constante.js";
 import { AuthContext } from "../contexts/AuthContext.js";
 import { EventContext } from "../contexts/EventContext.js";
+import Cards from "../components/Cards.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHand, faHandFist, faHandScissors } from "@fortawesome/free-solid-svg-icons";
 export default function MatchView() {
   const { user } = useContext(AuthContext);
   const { getMatch ,getMatches, match } = useContext(MatchContext);
@@ -65,11 +68,17 @@ export default function MatchView() {
 
         <div className="game-info">
           <span>{playerMessage}</span>
+          accéder
+          accéder
+          a
+          accéder
+          
         </div>
-        <div className="hand"></div>
-          <button onClick={() => handleTurn("rock")}>Pierre</button>
-          <button onClick={() => handleTurn("paper")}>Papier</button>
-          <button onClick={() => handleTurn("scissors")}>Ciseaux</button>
+        <div className="hand">
+          <Cards onClick={() => handleTurn("rock")} move={<FontAwesomeIcon icon={faHandFist} color="var(--color-secondary)"/>}/>
+          <Cards onClick={() => handleTurn("paper")} move={<FontAwesomeIcon icon={faHand } color="var(--color-secondary)"/>}/>
+          <Cards onClick={() => handleTurn("scissors")} move={<FontAwesomeIcon icon={faHandScissors} color="var(--color-secondary)"/>}/>
+        </div>
           <p>Winner: {match.winner && match.winner.username}</p>
           <p>Turns: {match.turns && match.turns.length}</p>
           {error && <p>{error}</p>} 

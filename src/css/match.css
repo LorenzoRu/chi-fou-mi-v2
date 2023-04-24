@@ -7,3 +7,21 @@
     font-weight: 600;
     color: var(--color-primary);
 }
+
+.hand {
+    display: flex;
+    justify-content: space-around;
+} 
+
+.card:hover {
+    cursor: pointer;
+}
+
+.board {
+    background-color: aqua;
+    height: 40vh;
+}
+.game-info {
+    height: 25px;
+    background-color: bisque;
+}
