@@ -3,7 +3,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import { Link, Outlet } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHandScissors, faHouse, faPlugCircleXmark, faUser } from "@fortawesome/free-solid-svg-icons";
-import Button from "../components/Button.js";
+import Button from "../components/Button";
 
 
 export default function AppLayout() {
