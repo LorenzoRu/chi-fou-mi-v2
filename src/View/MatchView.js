@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MatchContext } from "../contexts/MatchContext.js";
-import {  useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { API_BASE_URL } from "../lib/constante.js";
 import { AuthContext } from "../contexts/AuthContext.js";
 import { EventContext } from "../contexts/EventContext.js";
@@ -15,29 +15,39 @@ import {
 import WinnerModal from "../components/WinnerModal.js";
 export default function MatchView() {
   const { user } = useContext(AuthContext);
-  const { getMatch, match} = useContext(MatchContext);
+  const { getMatch, match } = useContext(MatchContext);
   const { id } = useParams();
   const [error, setError] = useState(null);
   const { playerMessage, turn } = useContext(EventContext);
   const [showMessage, setShowMessage] = useState(true);
+  const [user2Move, setUser2Move] = useState(null);
+  const [user1Move, setUser1Move] = useState(null);
 
+  useEffect(() => {
+    if (match.turns && match.turns.length > 0) {
+      setUser2Move(match.turns[match.turns.length - 1].user2);
+      setUser1Move(match.turns[match.turns.length - 1].user1);
+    }
+    if (match.turns && match.turns.length === 0) {
+      setUser2Move(null);
+      setUser1Move(null);
+    }
+  }, [match.turns, id]);
 
   useEffect(() => {
     getMatch(id);
-     // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [id]);
   useEffect(() => {
     getMatch(id);
-     
-     setShowMessage(true); 
-     const timeoutId = setTimeout(() => {
-       setShowMessage(false); 
-     }, 10000);
-     return () => clearTimeout(timeoutId);
-     // eslint-disable-next-line
+
+    setShowMessage(true);
+    const timeoutId = setTimeout(() => {
+      setShowMessage(false);
+    }, 10000);
+    return () => clearTimeout(timeoutId);
+    // eslint-disable-next-line
   }, [turn]);
-
-
 
   async function handleTurn(move) {
     try {
@@ -51,18 +61,17 @@ export default function MatchView() {
           }),
         }
       );
-   
-      if (response.status === 202) {
 
+      if (response.status === 202) {
       } else {
         const errorData = await response.json();
         const error = errorData.match || errorData.user || errorData.turn;
         throw new Error(error);
       }
     } catch (error) {
-      setError(error.message); 
-        const timeoutId = setTimeout(() => {
-        setError(null); 
+      setError(error.message);
+      const timeoutId = setTimeout(() => {
+        setError(null);
       }, 5000);
       return () => clearTimeout(timeoutId);
     }
@@ -85,17 +94,53 @@ export default function MatchView() {
           )}
           <div className="board">
             <div className="cards-content">
-              <Cards bgColor="var(--color-tertiary)" />
-              <Cards bgColor="var(--color-tertiary)"/>
-            </div> 
+              <div className="user-card">
+                <span className="username">{match.user1 && match.user1.username}</span>
+                <Cards
+                  color="var(--color-secondary)"
+                  bgColor="var(--color-tertiary)"
+                  move={
+                    user1Move === "rock" ? (
+                      <FontAwesomeIcon icon={faHandFist} />
+                    ) : user1Move === "paper" ? (
+                      <FontAwesomeIcon icon={faHand} />
+                    ) : user1Move === "scissors" ? (
+                      <FontAwesomeIcon icon={faHandScissors} />
+                    ) : null
+                  }
+                />
+              </div>
+              <div className="user-card">
+                <span className="username">{match.user2 && match.user2.username}</span>
+                <Cards
+                  color="var(--color-secondary)"
+                  bgColor="var(--color-tertiary)"
+                  move={
+                    user2Move === "rock" ? (
+                      <FontAwesomeIcon icon={faHandFist} />
+                    ) : user2Move === "paper" ? (
+                      <FontAwesomeIcon icon={faHand} />
+                    ) : user2Move === "scissors" ? (
+                      <FontAwesomeIcon icon={faHandScissors} />
+                    ) : null
+                  }
+                />
+              </div>
+            </div>
             <div className="game-info">
-            <span className="turn-display">Manche : {match.turns && match.turns.length}</span>
-            {showMessage && <span className="live-msg">{playerMessage}</span>}
-            {error && <p className="error"><FontAwesomeIcon icon={faExclamationCircle} className="err" />{error}</p>}
-          </div>
+              <span className="turn-display">
+                Manche : {match.turns && match.turns.length}
+              </span>
+              {showMessage && <span className="live-msg">{playerMessage}</span>}
+              {error && (
+                <p className="error">
+                  <FontAwesomeIcon icon={faExclamationCircle} className="err" />
+                  {error}
+                </p>
+              )}
+            </div>
           </div>
 
-         
           <div className="hand">
             <Cards
               onClick={() => handleTurn("rock")}
@@ -128,10 +173,13 @@ export default function MatchView() {
               border={"6px solid var(--color-secondary)"}
             />
           </div>
-          {match.winner  && <WinnerModal text={"remporte la victoire"} winner={match.winner && match.winner.username} />}
-          {match.winner === null   && <WinnerModal  winner={"Draw"} />}
-        
-
+          {match.winner && (
+            <WinnerModal
+              text={"remporte la victoire"}
+              winner={match.winner && match.winner.username}
+            />
+          )}
+          {match.winner === null && <WinnerModal winner={"Draw"} />}
         </div>
       )}
     </>

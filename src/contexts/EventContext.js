@@ -1,7 +1,8 @@
 import { EventSourcePolyfill } from "event-source-polyfill";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { API_BASE_URL } from "../lib/constante";
 import { useParams } from "react-router-dom";
+import { MatchContext } from "./MatchContext";
 
 export const EventContext = createContext();
 
@@ -10,8 +11,7 @@ export default function EventProvider({ children }) {
   const [events, setEvents] = useState([]);
   const [playerMessage, setPlayerMessage] = useState("");
   const [turn, setTurn] = useState(0);
-  const [endMatch, setEndMatch] = useState(false);
-  console.log(turn);
+  const { match } = useContext(MatchContext);
   useEffect(() => {
     const eventSource = new EventSourcePolyfill(
       `${API_BASE_URL}/matches/${id}/subscribe`,
@@ -41,14 +41,20 @@ export default function EventProvider({ children }) {
         if (eventData.payload.winner === "draw") {
           setPlayerMessage(`Match nul !`);
         }else {
-          setPlayerMessage(`${eventData.payload.winner} a gagné le tour ! `);
+          const winPlayer = eventData.payload.winner === "user1" ? match.user1 &&  match.user1.username : match.user2 &&  match.user2.username ;
+    setPlayerMessage(`${winPlayer} a gagné le tour ! `);
         }
         
         setTurn(eventData.payload.newTurnId);
       }
 
       if (eventData.type === "MATCH_ENDED") { 
-        setEndMatch(true);
+        if (eventData.payload.winner === "draw") {
+          setPlayerMessage(`Match nul !`);
+        } else {
+          setPlayerMessage(`${eventData.payload.winner} a gagné ! `);
+        }
+       
       }
 
     
@@ -62,7 +68,7 @@ export default function EventProvider({ children }) {
   }, [id]);
 
   return (
-    <EventContext.Provider value={{ events, playerMessage, turn, endMatch}}>
+    <EventContext.Provider value={{ events, playerMessage, turn}}>
       {children}
     </EventContext.Provider>
   );
