@@ -18,10 +18,29 @@
 }
 
 .board {
-    background-color: aqua;
     height: 40vh;
+    display: flex;
+}
+.cards-content{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    width: 50%;
 }
 .game-info {
-    height: 25px;
-    background-color: bisque;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 50%;
+}
+
+.turn-display {
+ font-size: 4rem;
+ font-weight: 800;
+}
+
+.live-msg {
+    font-size: 2rem;
+    color: green;
 }

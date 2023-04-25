@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Cards({onClick, move, color, bgColor}) {
+export default function Cards({onClick, move, color, bgColor, card, border}) {
     const cardStyle = {
         height: "230px",
         width: "155.3px",
@@ -14,14 +14,14 @@ export default function Cards({onClick, move, color, bgColor}) {
         height: "213.3px",
         width: "144px",
         color: color,
-        border: "6px solid var(--color-secondary)",
+        border: border,
         display: "grid",
         placeItems: "center",
         borderRadius: "2.5rem",
         fontSize: "5.5rem",
     }
   return (
-    <div style={cardStyle} onClick={onClick} className='card'>
+    <div style={cardStyle} onClick={onClick} className={card}>
         <div style={cardContainerStyle }>
             <span>{move}</span>
         </div>

@@ -1,0 +1,56 @@
+.modal-container {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-details {
+    background-color: whitesmoke;
+    width: 35%;
+    text-align: center;
+    position: relative;
+    padding: 3rem;
+    border-radius: 2.5rem;
+}
+
+.modal-details .return {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    font-size: 2rem;
+    padding: 1rem;
+    color: grey;
+    cursor: pointer;
+}
+
+.winner {
+    font-size: 3rem;
+    color: var(--color-primary);
+}
+.winner-name {
+    font-weight: 800;
+    color: var(--color-tertiary);
+}
+ 
+.modal-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-modal {
+    height: 4rem;
+   font-size: 2rem;
+   background-color: var(--color-tertiary);
+   border: none;
+   color: whitesmoke;
+   border-radius: 1rem;
+   margin-top: 4rem;
+    cursor: pointer;
+
+}

@@ -1,5 +1,5 @@
 import { EventSourcePolyfill } from "event-source-polyfill";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { API_BASE_URL } from "../lib/constante";
 import { useParams } from "react-router-dom";
 
@@ -10,6 +10,7 @@ export default function EventProvider({ children }) {
   const [events, setEvents] = useState([]);
   const [playerMessage, setPlayerMessage] = useState("");
   const [turn, setTurn] = useState(0);
+  const [endMatch, setEndMatch] = useState(false);
   console.log(turn);
   useEffect(() => {
     const eventSource = new EventSourcePolyfill(
@@ -27,24 +28,30 @@ export default function EventProvider({ children }) {
         eventData.type === "PLAYER1_JOIN" ||
         eventData.type === "PLAYER2_JOIN"
       ) {
-        console.log("player join");
         setPlayerMessage(` ${eventData.payload.user} a rejoint la partie`);
       }
      
       if (eventData.type === "NEW_TURN") {
-        console.log("new turn" + eventData.payload.turnId);
         setTurn(eventData.payload.turnId);
       }
       if (eventData.type === "PLAYER1_MOVED" || eventData.type === "PLAYER1_MOVED" ) {
-        console.log("player moved");
-        setPlayerMessage('Votre adversaire a joué');
+        setPlayerMessage('Un joueur a joué');
       }
       if (eventData.type === "TURN_ENDED") {
-        console.log("turn ended");
-        setPlayerMessage(`${eventData.payload.winner} a gagné le tour ! Le tour ${eventData.payload.newTurnId} commence`);
+        if (eventData.payload.winner === "draw") {
+          setPlayerMessage(`Match nul !`);
+        }else {
+          setPlayerMessage(`${eventData.payload.winner} a gagné le tour ! `);
+        }
+        
         setTurn(eventData.payload.newTurnId);
-        console.log(eventData.payload.newTurnId);
       }
+
+      if (eventData.type === "MATCH_ENDED") { 
+        setEndMatch(true);
+      }
+
+    
 
       setEvents((prevEvents) => [...prevEvents, eventData]);
     };
@@ -55,7 +62,7 @@ export default function EventProvider({ children }) {
   }, [id]);
 
   return (
-    <EventContext.Provider value={{ events, playerMessage, turn, }}>
+    <EventContext.Provider value={{ events, playerMessage, turn, endMatch}}>
       {children}
     </EventContext.Provider>
   );

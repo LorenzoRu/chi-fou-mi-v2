@@ -37,7 +37,7 @@ Content-Type: application/json
 
 ###
 
-GET {{host}}/matches/643521a71e1b9407b260ea3b
+GET {{host}}/matches/6447f5c01e1b9407b263237c
 Authorization: Bearer {{token}}
 
 ###

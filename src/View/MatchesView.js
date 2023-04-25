@@ -23,6 +23,7 @@ export default function MatchesView() {
   };
   useEffect(() => {
     getMatches();
+    // eslint-disable-next-line
   }, []);
   
   
