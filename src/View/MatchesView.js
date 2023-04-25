@@ -3,7 +3,6 @@ import { AuthContext } from "../contexts/AuthContext.js";
 import { MatchContext } from "../contexts/MatchContext.js";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import Button from "../components/Button.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faExclamationCircle,
@@ -11,6 +10,7 @@ import {
   faRotate,
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
+import Buttons from "../components/Buttons.js";
 
 export default function MatchesView() {
   const { matches, getMatches, createMatch, error } = useContext(MatchContext);
@@ -43,13 +43,13 @@ export default function MatchesView() {
       )}
       {user !== false && (
         <div className="btn-box">
-          <Button
+          <Buttons
             color={"var(--color-tertiary)"}
             text={"Actualiser"}
             startIcon={<FontAwesomeIcon icon={faRotate} />}
             onClick={getMatches}
           />
-          <Button
+          <Buttons
             color={"var(--color-tertiary)"}
             text={"Rejoindre un match"}
             startIcon={<FontAwesomeIcon icon={faMagnifyingGlass} />}
@@ -69,7 +69,7 @@ export default function MatchesView() {
               ) : (
                 <h3> En attente d'un adversire</h3>
               )}
-              <Button
+              <Buttons
                 color={"var(--color-tertiary)"}
                 text={"Rejoindre"}
                 startIcon={<FontAwesomeIcon icon={faUsers} />}

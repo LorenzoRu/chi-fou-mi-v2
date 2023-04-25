@@ -65,6 +65,7 @@ export default function EventProvider({ children }) {
     return () => {
       eventSource.close();
     };
+    // eslint-disable-next-line
   }, [id]);
 
   return (
