@@ -12,7 +12,7 @@ export default function Identify() {
 
   useEffect(() => {
     // eslint-disable-next-line eqeqeq
-    if (user !== false) return navigate("/");
+    if (user !== false) return navigate("/matches");
   }, [user, navigate]);
 
   if (user !== false) return <></>;

@@ -22,6 +22,10 @@ export default function MatchesView() {
     navigate(`/matches/${match._id}`);
   };
   useEffect(() => {
+    // eslint-disable-next-line eqeqeq
+    if (user === false) return navigate("/identify");
+  }, [user, navigate]); 
+  useEffect(() => {
     getMatches();
     // eslint-disable-next-line
   }, []);
@@ -36,11 +40,11 @@ export default function MatchesView() {
     }
   }, [error])
 
+ 
+
   return (
     <div>
-      {user === false && (
-        <p>Vous devez être connecté pour accéder à cette page</p>
-      )}
+     
       {user !== false && (
         <div className="btn-box">
           <Buttons

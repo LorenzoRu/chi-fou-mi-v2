@@ -7,6 +7,7 @@ import MatchProvider from "./contexts/MatchContext";
 import MatchView from "./View/MatchView";
 import "./css/main.css";
 import EventProvider from "./contexts/EventContext";
+import Home from "./View/Home";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
           <MatchProvider>
           <Routes>
             <Route path="/" element={<AppLayout />}>
-            <Route path="/" element={<h2>Hello Home</h2>} />
+            <Route path="/" element={<Home />} />
             <Route path="identify" element={<Identify />} />
                <Route path="matches" element={<MatchesView/>} />
             <Route path="matches/:id" element={<EventProvider><MatchView/></EventProvider>} / >

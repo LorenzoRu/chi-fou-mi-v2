@@ -1,0 +1,22 @@
+.container-home {
+    padding:  3rem;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+h1 {
+    font-size: 4rem;
+    font-weight: 600;
+    margin-bottom: 2.4rem;
+}
+
+.rules {
+    font-size: 2.5rem;
+    margin-bottom: 2.4rem;
+}
+
+.desc {
+    font-size: 2rem;
+    margin-bottom: 2.4rem;
+}

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MatchContext } from "../contexts/MatchContext.js";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { API_BASE_URL } from "../lib/constante.js";
 import { AuthContext } from "../contexts/AuthContext.js";
 import { EventContext } from "../contexts/EventContext.js";
@@ -22,6 +22,12 @@ export default function MatchView() {
   const [showMessage, setShowMessage] = useState(true);
   const [user2Move, setUser2Move] = useState(null);
   const [user1Move, setUser1Move] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // eslint-disable-next-line eqeqeq
+    if (user === false) return navigate("/identify");
+  }, [user, navigate]);
 
   useEffect(() => {
     if (match.turns && match.turns.length > 0) {
