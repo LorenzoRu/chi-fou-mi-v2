@@ -30,34 +30,37 @@ export default function EventProvider({ children }) {
       ) {
         setPlayerMessage(` ${eventData.payload.user} a rejoint la partie`);
       }
-     
+
       if (eventData.type === "NEW_TURN") {
         setTurn(eventData.payload.turnId);
       }
-      if (eventData.type === "PLAYER1_MOVED" || eventData.type === "PLAYER1_MOVED" ) {
-        setPlayerMessage('Un joueur a joué');
+      if (
+        eventData.type === "PLAYER1_MOVED" ||
+        eventData.type === "PLAYER1_MOVED"
+      ) {
+        setPlayerMessage("Un joueur a joué");
       }
       if (eventData.type === "TURN_ENDED") {
         if (eventData.payload.winner === "draw") {
           setPlayerMessage(`Match nul !`);
-        }else {
-          const winPlayer = eventData.payload.winner === "user1" ? match.user1 &&  match.user1.username : match.user2 &&  match.user2.username ;
-    setPlayerMessage(`${winPlayer} a gagné le tour ! `);
+        } else {
+          const winPlayer =
+            eventData.payload.winner === "user1"
+              ? match.user1 && match.user1.username
+              : match.user2 && match.user2.username;
+          setPlayerMessage(`${winPlayer} a gagné le tour ! `);
         }
-        
+
         setTurn(eventData.payload.newTurnId);
       }
 
-      if (eventData.type === "MATCH_ENDED") { 
+      if (eventData.type === "MATCH_ENDED") {
         if (eventData.payload.winner === "draw") {
           setPlayerMessage(`Match nul !`);
         } else {
           setPlayerMessage(`${eventData.payload.winner} a gagné ! `);
         }
-       
       }
-
-    
 
       setEvents((prevEvents) => [...prevEvents, eventData]);
     };
@@ -69,7 +72,7 @@ export default function EventProvider({ children }) {
   }, [id]);
 
   return (
-    <EventContext.Provider value={{ events, playerMessage, turn}}>
+    <EventContext.Provider value={{ events, playerMessage, turn }}>
       {children}
     </EventContext.Provider>
   );
