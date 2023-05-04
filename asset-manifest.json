@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/chi-fou-mi-v2/static/css/main.f9aa4ce5.css",
+    "main.js": "/chi-fou-mi-v2/static/js/main.df89a947.js",
+    "static/media/rubik.png": "/chi-fou-mi-v2/static/media/rubik.27c32e47c86c50017584.png",
+    "static/media/Screen.png": "/chi-fou-mi-v2/static/media/Screen.0abee2beac85b280709a.png",
+    "index.html": "/chi-fou-mi-v2/index.html",
+    "main.f9aa4ce5.css.map": "/chi-fou-mi-v2/static/css/main.f9aa4ce5.css.map",
+    "main.df89a947.js.map": "/chi-fou-mi-v2/static/js/main.df89a947.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f9aa4ce5.css",
+    "static/js/main.df89a947.js"
+  ]
+}
